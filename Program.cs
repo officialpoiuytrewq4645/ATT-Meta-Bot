@@ -25,7 +25,7 @@ namespace MegaMetaBot
 
 
             // Read the credentials with login information.
-            string tokenFromTestFile = System.IO.File.ReadAllText(@"./Token.txt");
+            string tokenFromTestFile = System.IO.File.ReadAllText("./Credentials/Token.txt");
 
 
 
@@ -71,9 +71,6 @@ namespace MegaMetaBot
 
             // Create a list called data, containing everything from the spreadsheet.
             List<Database.CommandData> data = Database.init();
-
-
-
 
 
 
