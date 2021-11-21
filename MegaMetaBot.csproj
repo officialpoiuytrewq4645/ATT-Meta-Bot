@@ -104,12 +104,12 @@
     <Compile Include="Variables.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="App.config" />
     <None Include="Credentials\credentials.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="VisualStudio.gitignore" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Credentials\Token.txt">

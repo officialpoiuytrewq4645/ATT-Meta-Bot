@@ -1,4 +1,6 @@
 ﻿using Discord;
+using Discord.WebSocket;
+
 using System;
 using System.Threading.Tasks;
 
@@ -8,9 +10,9 @@ namespace MegaMetaBot
     {
         // This is called to send a message on discord.
         // Not needed for this bot, but people who use this bot as a basis for their own may appreciate it.
-        public async static Task It(string whatToSay) 
+        public async static Task It(SocketMessage MessageToRespondTo, string whatToSay) 
         {
-            await Guild.Message.Channel.SendMessageAsync(whatToSay);
+            await MessageToRespondTo.Channel.SendMessageAsync(whatToSay);
         }
 
 
@@ -18,9 +20,9 @@ namespace MegaMetaBot
 
 
         // This is called to send an embed to discord.
-        public async static void Embed(EmbedBuilder importedEmbedBuilder)
+        public async static void Embed(SocketMessage MessageToRespondTo, EmbedBuilder importedEmbedBuilder)
         {
-            var responseChannel = Guild.client.GetChannel(Guild.Message.Channel.Id) as IMessageChannel;
+            var responseChannel = Guild.client.GetChannel(MessageToRespondTo.Channel.Id) as IMessageChannel;
             await responseChannel.SendMessageAsync("", false, importedEmbedBuilder.Build());
         }
     }

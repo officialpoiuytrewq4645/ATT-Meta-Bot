@@ -8,6 +8,7 @@ using Google.Apis.Util.Store;
 using System.IO;
 using System.Threading;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Sheets_Database
 {
@@ -67,11 +68,12 @@ namespace Sheets_Database
                     foreach (FieldInfo val in typeof(CommandData).GetFields(BindingFlags.Public | BindingFlags.Instance))
                     {
                         //damn you inconsistent zero based thingies
-                        if(row.Count - 1  < i)
+                        if (row.Count - 1 < i)
                         {
                             break;
                         }
-                        val.SetValue(data, row[i]);
+                        
+                        val.SetValue(data, ParseSpecialChars(row[i]));
                         // I know I know (get it lol) i could use a for loop but i like doing this
                         i++;
                     }
@@ -86,6 +88,25 @@ namespace Sheets_Database
             }
             return ResultData;
         }
+
+        private static object ParseSpecialChars(object thing)
+        {
+            if (thing is string)
+            {
+                string text = (string)thing;
+                if(text.Contains("\\n"))
+                {
+                    text = text.Replace("\\n", "\n");
+                }
+                return text;
+            }
+            else
+            {
+                return thing;
+            }
+
+        }
+
         public class CommandData
         {
             public string Trigger;

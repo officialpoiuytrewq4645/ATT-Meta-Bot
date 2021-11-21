@@ -64,23 +64,22 @@ namespace MegaMetaBot
 
 
 
-            // Make a global version for ease of access later.
-            Guild.Message = Message;
-
-
-
-            // Create a list called data, containing everything from the spreadsheet.
-            List<Database.CommandData> data = Database.init();
-
+            //// Make a global version for ease of access later.
+            //Guild.Message = Message;
 
 
 
             // If the user's message started with CommandPrefix, it may have been a command. Check for a matching command.
-            if (Guild.Message.Content.StartsWith(CommandPrefix))
+            if (Message.Content.StartsWith(CommandPrefix))
             {
 
+
+                // Create a list called data, containing everything from the spreadsheet.
+                List<Database.CommandData> data = Database.init();
+
+
                 // If the user's message is !list, show them a list of commands.
-                if (Guild.Message.Content.ToLower().Substring(CommandPrefix.Length) == "list")
+                if (Message.Content.ToLower().Substring(CommandPrefix.Length) == "list")
                 {
                     string commandList = "";
 
@@ -93,7 +92,7 @@ namespace MegaMetaBot
                         // If the string length with the next item would be 1950 characters or more, send what we have, then clear the string.
                         if ((currentLength + triggerLength) >= 1950)
                         {
-                            await Say.It(commandList);
+                            await Say.It(Message, commandList);
                             commandList = "";
                         }
                         commandList += CommandPrefix + myData.Trigger + ", ";
@@ -105,14 +104,14 @@ namespace MegaMetaBot
                     commandList = commandList.Substring(0, commandList.Length - 2);
 
                     // Send the result to discord.
-                    await Say.It(commandList);
+                    await Say.It(Message, commandList);
                 }
 
                 // Loop through each list item.
 
                 //clean up the command message before looping
                 //cut off the command prefx by its length and make the message lowercase for comparison to command in loop
-                string message = Guild.Message.Content.ToLower().Substring(CommandPrefix.Length);
+                string message = Message.Content.ToLower().Substring(CommandPrefix.Length);
 
                 foreach (Database.CommandData myData in data)
                 {
@@ -152,6 +151,7 @@ namespace MegaMetaBot
 
 
                             // Adds a description field if appropriate data is found.
+
                             if (myData.Description != null)
                             {
                                 FeedbackEmbed.WithDescription(myData.Description);
@@ -222,7 +222,7 @@ namespace MegaMetaBot
 
 
                             // Send the discord embed to discord.
-                            Say.Embed(FeedbackEmbed);
+                            Say.Embed(Message, FeedbackEmbed);
 
 
 
