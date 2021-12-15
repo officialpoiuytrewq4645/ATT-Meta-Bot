@@ -60,7 +60,7 @@ namespace MegaMetaBot
 
 
             // Only listen to the approved channel
-            if (Message.Channel.Id != Guild.CoG_MetaBotTestingChannel) return;
+            //if (Message.Channel.Id != Guild.CoG_MetaBotTestingChannel) return;
 
 
 
