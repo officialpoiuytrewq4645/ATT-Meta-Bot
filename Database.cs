@@ -110,6 +110,7 @@ namespace Sheets_Database
         public class CommandData
         {
             public string Trigger;
+            public string Category;
             public string Title;
             public string Image;
             public string Description;

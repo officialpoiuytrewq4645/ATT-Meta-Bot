@@ -20,10 +20,12 @@ namespace MegaMetaBot
 
 
         // This is called to send an embed to discord.
-        public async static void Embed(SocketMessage MessageToRespondTo, EmbedBuilder importedEmbedBuilder)
+        public async static Task Embed(SocketMessage MessageToRespondTo, EmbedBuilder importedEmbedBuilder)
         {
             var responseChannel = Guild.client.GetChannel(MessageToRespondTo.Channel.Id) as IMessageChannel;
             await responseChannel.SendMessageAsync("", false, importedEmbedBuilder.Build());
         }
+
+
     }
 }
