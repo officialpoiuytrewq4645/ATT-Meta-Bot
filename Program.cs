@@ -12,7 +12,7 @@ namespace MegaMetaBot
         private readonly string CommandPrefix = "!";
         public static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
-
+        //test comment
         public async Task MainAsync()
         {
             Console.WriteLine("Logging in...\n");
